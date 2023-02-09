@@ -30,7 +30,7 @@ public class PlayersMovement : MonoBehaviour
 
         if (yinOrYang)
         {
-            if (!_canChargeDash ) { return; }
+            if (!_canChargeDash || stuned ) { return; }
             _desiredVelocity = new Vector2(Input.GetAxisRaw("YinHorizontal"), Input.GetAxisRaw("YinVertical")).normalized * speedModifier;
             if (Input.GetButton("Jump"))
             {
@@ -68,10 +68,11 @@ public class PlayersMovement : MonoBehaviour
         {
             case "Player":
                 if (_canChargeDash) {return; } 
-                col.gameObject.GetComponent<PlayersMovement>().StartCoroutine( Stun(5f));
+                col.gameObject.GetComponent<PlayersMovement>().StartCoroutine( Stun(2f));
                 col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                col.gameObject.GetComponent<Rigidbody2D>().AddForce(_rigidbody2D.velocity * 1.5f);
-                _rigidbody2D.velocity = Vector2.zero;  StartCoroutine(Stun(0.5f)); _desiredVelocity = Vector2.zero; break;
+                col.gameObject.GetComponent<Rigidbody2D>().velocity = _rigidbody2D.velocity * 2f;
+                _rigidbody2D.velocity = Vector2.zero;  StartCoroutine(Stun(0.5f)); _desiredVelocity = Vector2.zero;
+                _canChargeDash = true;  break;
             case "DeathZone": _currentHP--; transform.position = respawnPoint.position; UIHardUpdate(); break;
         }
     }
@@ -89,7 +90,7 @@ public class PlayersMovement : MonoBehaviour
     {
         _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * (speedModifier * dashSpeedMultiplier * (_currentDashCharge/_maxDashCharge));
         maxSpeedDelta = 0.1f;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(7/_rigidbody2D.velocity.magnitude);
         _canChargeDash = true;
         maxSpeedDelta = 0.4f;
     }
