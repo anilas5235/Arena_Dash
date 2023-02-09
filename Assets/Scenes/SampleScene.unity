@@ -1820,6 +1820,10 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8958502481343109139, guid: 2afdc2716e8868b44b215f6354205f60, type: 3}
+      propertyPath: speedModifier
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958502481343109139, guid: 2afdc2716e8868b44b215f6354205f60, type: 3}
       propertyPath: uiHP.Array.data[0]
       value: 
       objectReference: {fileID: 652257371}
@@ -1831,5 +1835,9 @@ PrefabInstance:
       propertyPath: uiHP.Array.data[2]
       value: 
       objectReference: {fileID: 1103470922}
+    - target: {fileID: 8958502481343109139, guid: 2afdc2716e8868b44b215f6354205f60, type: 3}
+      propertyPath: dashSpeedMultiplier
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2afdc2716e8868b44b215f6354205f60, type: 3}
