@@ -9,6 +9,7 @@ public class PlayersMovement : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private Image[] uiHP;
     [SerializeField] private Sprite fullHard, emptyHard;
+    [SerializeField] private Animator animator;
 
     private Rigidbody2D _rigidbody2D;
     private Vector2 _desiredVelocity;
@@ -20,6 +21,7 @@ public class PlayersMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         _maxHP = _currentHP = uiHP.Length;
         UIHardUpdate();
     }
@@ -37,6 +39,7 @@ public class PlayersMovement : MonoBehaviour
                 if (_currentDashCharge < _maxDashCharge && _canChargeDash)
                 {
                     _currentDashCharge += Time.deltaTime;
+                    animator.SetInteger("DashState",1);
                 }
             }
 
@@ -88,11 +91,13 @@ public class PlayersMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        animator.SetInteger("DashState",2);
         _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * (speedModifier * dashSpeedMultiplier * (_currentDashCharge/_maxDashCharge));
         maxSpeedDelta = 0.1f;
         yield return new WaitForSeconds(7/_rigidbody2D.velocity.magnitude);
         _canChargeDash = true;
         maxSpeedDelta = 0.4f;
+        animator.SetInteger("DashState",0);
     }
 
     public IEnumerator Stun(float stunTime)
