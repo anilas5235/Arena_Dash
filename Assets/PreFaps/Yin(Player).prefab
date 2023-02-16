@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4506329207150898647
+--- !u!1 &297075010644476850
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,36 +8,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3717791043857203849}
-  - component: {fileID: 4995111276063269525}
+  - component: {fileID: 2715988499596359172}
+  - component: {fileID: 8898440971523264932}
   m_Layer: 0
-  m_Name: Pfeil_rot
+  m_Name: Karpfen_weis_2-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3717791043857203849
+  m_IsActive: 0
+--- !u!4 &2715988499596359172
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4506329207150898647}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_GameObject: {fileID: 297075010644476850}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8958502481343109136}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!212 &4995111276063269525
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!212 &8898440971523264932
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4506329207150898647}
+  m_GameObject: {fileID: 297075010644476850}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -71,12 +71,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 3d5d13b9e6ace6f4381a4a8a8802b77c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2e4b20ef4fd5284bbf6325ee9e9db95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 38.399998, y: 21.599998}
+  m_Size: {x: 35.079998, y: 24.802656}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -111,7 +111,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8958502481343109136}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8958502480092015389
 SpriteRenderer:
@@ -152,13 +152,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 08e360260dba2464dac56aaee3db7a19, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 1951452926910882741, guid: 08e360260dba2464dac56aaee3db7a19, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 38.399998, y: 21.599998}
+  m_Size: {x: 8.8, y: 7.57}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -195,8 +195,8 @@ Transform:
   m_LocalPosition: {x: -7, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
-  - {fileID: 3717791043857203849}
   - {fileID: 8958502480092015386}
+  - {fileID: 2715988499596359172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -213,7 +213,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
 --- !u!50 &8958502481343109138
@@ -252,7 +252,7 @@ MonoBehaviour:
   yinOrYang: 1
   speedModifier: 10
   maxSpeedDelta: 0.6
-  dashSpeedMultiplier: 0
+  dashSpeedMultiplier: 4
   respawnPoint: {fileID: 0}
   uiHP:
   - {fileID: 0}
@@ -260,6 +260,7 @@ MonoBehaviour:
   - {fileID: 0}
   fullHard: {fileID: 21300000, guid: 0479da131c267f0438b25dd08b5142e0, type: 3}
   emptyHard: {fileID: 21300000, guid: 0ebf4de237263d943b9d17bd21087958, type: 3}
+  animator: {fileID: 0}
 --- !u!95 &8635222506476382449
 Animator:
   serializedVersion: 3
