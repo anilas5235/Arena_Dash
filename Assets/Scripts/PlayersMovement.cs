@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayersMovement : MonoBehaviour
@@ -9,9 +8,10 @@ public class PlayersMovement : MonoBehaviour
     [SerializeField] private float speedModifier, maxSpeedDelta, dashSpeedMultiplier;
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private Image[] uiHP;
-    [FormerlySerializedAs("fullHard")] [SerializeField] private Sprite fullHeart;
-    [FormerlySerializedAs("emptyHard")] [SerializeField] private Sprite emptyHeart;
+    [SerializeField] private Sprite fullHeart;
+    [SerializeField] private Sprite emptyHeart;
     [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer koyTail;
 
     private Rigidbody2D _rigidbody2D;
     private Vector2 _desiredVelocity,_oldVeclocity;
@@ -31,10 +31,9 @@ public class PlayersMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
+        if (!_canChargeDash || stuned ) { return; }
         if (yinOrYang)
         {
-            if (!_canChargeDash || stuned ) { return; }
             _desiredVelocity = new Vector2(Input.GetAxisRaw("YinHorizontal"), Input.GetAxisRaw("YinVertical")).normalized * speedModifier;
             if (Input.GetButton("Jump"))
             {
@@ -48,7 +47,7 @@ public class PlayersMovement : MonoBehaviour
             if (Input.GetButtonUp("Jump"))
             {
                 _canChargeDash = false;
-                if (_currentDashCharge > 1f)
+                if (_currentDashCharge > 0.5f)
                 { StartCoroutine( Dash()); }
                 else
                 {
@@ -73,7 +72,7 @@ public class PlayersMovement : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.RightControl))
             {
                 _canChargeDash = false;
-                if (_currentDashCharge > 1f)
+                if (_currentDashCharge > 0.5f)
                 { StartCoroutine( Dash()); }
                 else
                 {
@@ -112,12 +111,13 @@ public class PlayersMovement : MonoBehaviour
         {
             case "Player":
                 if (_canChargeDash) {return; } 
+                StopCoroutine(Dash());
                 col.gameObject.GetComponent<PlayersMovement>().StartCoroutine( Stun(2f));
-                col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 col.gameObject.GetComponent<Rigidbody2D>().velocity = _rigidbody2D.velocity * 1.5f;
-                _rigidbody2D.velocity = Vector2.zero;  StartCoroutine(Stun(0.5f)); _desiredVelocity = Vector2.zero;
+                _rigidbody2D.velocity = Vector2.zero;  StartCoroutine(Stun(1f)); _desiredVelocity = Vector2.zero;
                 _canChargeDash = true;  break;
-            case "DeathZone": _currentHP--; transform.position = respawnPoint.position; UIHeartUpdate(); break;
+            case "DeathZone": _currentHP--;StartCoroutine(Stun(0.5f)); transform.position = respawnPoint.position; UIHeartUpdate();
+               break;
         }
     }
 
@@ -132,21 +132,23 @@ public class PlayersMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        if(_desiredVelocity.magnitude<0.1f){ animator.SetInteger("DashState",0); }
-        else
-        {
-            animator.SetInteger("DashState", 2);
-            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * (speedModifier * dashSpeedMultiplier * (_currentDashCharge / _maxDashCharge));
-            maxSpeedDelta = 0.1f;
-            yield return new WaitForSeconds(7 / _desiredVelocity.magnitude);
-            _canChargeDash = true;
-            maxSpeedDelta = 0.4f;
-            animator.SetInteger("DashState", 0);
-        }
+        Vector2 dashDirection = _desiredVelocity.magnitude < 0.1f ? _oldVeclocity.normalized : _desiredVelocity.normalized;
+
+        koyTail.color = new Color(1, 1, 1, _currentDashCharge / _maxDashCharge);
+        animator.SetInteger("DashState", 2);
+        _rigidbody2D.velocity = dashDirection * (speedModifier * dashSpeedMultiplier * (_currentDashCharge / _maxDashCharge));
+        maxSpeedDelta = 0.2f;
+        yield return new WaitForSeconds(2 *(_currentDashCharge / _maxDashCharge));
+        maxSpeedDelta = 0.4f;
+        animator.SetInteger("DashState", 0);
+        _canChargeDash = true;
     }
 
     public IEnumerator Stun(float stunTime)
     {
+        maxSpeedDelta = 0.4f;
+        animator.SetInteger("DashState", 0);
+        _canChargeDash = true;
         stuned = true;
         yield return new WaitForSeconds(stunTime);
         stuned = false;

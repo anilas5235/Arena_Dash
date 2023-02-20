@@ -1609,7 +1609,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1991,7 +1991,7 @@ PrefabInstance:
       objectReference: {fileID: 1926566443}
     - target: {fileID: 8958502481343109139, guid: 2afdc2716e8868b44b215f6354205f60, type: 3}
       propertyPath: maxSpeedDelta
-      value: 0.4
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8958502481343109139, guid: 2afdc2716e8868b44b215f6354205f60, type: 3}
       propertyPath: speedModifier
@@ -2011,7 +2011,7 @@ PrefabInstance:
       objectReference: {fileID: 1103470922}
     - target: {fileID: 8958502481343109139, guid: 2afdc2716e8868b44b215f6354205f60, type: 3}
       propertyPath: dashSpeedMultiplier
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2afdc2716e8868b44b215f6354205f60, type: 3}

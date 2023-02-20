@@ -94,9 +94,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  fullHard: {fileID: 21300000, guid: bcc9e49b8592d034183e2d67dcad96c2, type: 3}
-  emptyHard: {fileID: 21300000, guid: 0ebf4de237263d943b9d17bd21087958, type: 3}
-  animator: {fileID: 0}
+  fullHeart: {fileID: 21300000, guid: bcc9e49b8592d034183e2d67dcad96c2, type: 3}
+  emptyHeart: {fileID: 21300000, guid: 0ebf4de237263d943b9d17bd21087958, type: 3}
+  animator: {fileID: 7371810257710225467}
+  koyTail: {fileID: 6948947662931688226}
 --- !u!95 &7371810257710225467
 Animator:
   serializedVersion: 3
